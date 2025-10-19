@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuickBooks OAuth Callback</title>
+  <style>
+    body { font-family: system-ui, sans-serif; text-align: center; margin-top: 4rem; color: #333; }
+    code { background: #f4f4f4; padding: 0.4em 0.6em; border-radius: 6px; display: inline-block; }
+  </style>
+</head>
+<body>
+  <h1>Authorization Code Received</h1>
+  <p>Copy the code below and paste it into your Python script.</p>
+  <p id="output">Reading code...</p>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+    const realmId = params.get("realmId");
+    const element = document.getElementById("output");
+
+    if (code) {
+      element.innerHTML = `<strong>Code:</strong> <code>${code}</code><br><br>` +
+                          (realmId ? `<strong>Realm ID:</strong> <code>${realmId}</code>` : "");
+      console.log("OAuth code:", code, "Realm ID:", realmId);
+    } else {
+      element.textContent = "No code found in the URL.";
+    }
+  </script>
+</body>
+</html>
